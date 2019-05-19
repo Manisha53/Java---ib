@@ -12,21 +12,23 @@ Your algorithm should run in O(n) time and use constant space.
 */
 
 
-int len = A.size();
+public class Solution {
+    public int firstMissingPositive(ArrayList<Integer> A) {
+        int len = A.size();
         for (int i = 0; i < len; i++) {
-            // swap until A[i] == i + 1 or we met non-positive number
+            // swap until A[i] == i + 1 or we met negative number
             while (A.get(i) != (i + 1) || A.get(i) <= 0) {
                 // swap A[i] with A[A[i] - 1]
-                int num = A.get(i);
-                int targetIndex = num - 1;
+                int cur = A.get(i);
+                int index = cur - 1;
                 // watch here ! test index within boundary first
-                if ((targetIndex < 0 || targetIndex >= len) || num == A.get(num - 1)) {
+                if ((index < 0 || index >= len) || cur == A.get(cur - 1)) {
                     // duplicated number
                     break;
                 }
                 // swap
-                A.set(i, A.get(num - 1));
-                A.set(num - 1, num);
+                A.set(i, A.get(cur - 1));
+                A.set(cur - 1, cur);
             }
         }
         // find the missing integer
@@ -38,3 +40,6 @@ int len = A.size();
         }
         // no missing number
         return len + 1;
+    }
+}
+
