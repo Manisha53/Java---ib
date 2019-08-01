@@ -1,0 +1,13 @@
+
+    select CONCAT(TRIM(directors.director_first_name), TRIM(directors.director_last_name))
+
+            as director_name ,movie_title 
+
+            from (((directors join movies_directors 
+
+                        on directors.director_id=movies_directors.director_id) join movies 
+                        on movies.movie_id=movies_directors.movie_id) join movies_cast
+                        on movies.movie_id=movies_cast.movie_id) where 
+                        movies_cast.role='SeanMaguire';
+
+
